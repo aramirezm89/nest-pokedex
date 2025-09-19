@@ -1,98 +1,213 @@
+# Pokedex API - NestJS
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Una API REST construida con NestJS para gestionar información de Pokémon, desarrollada como parte del curso de Fernando Herrera.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 📋 Descripción
 
-## Description
+Esta aplicación es una API REST que permite gestionar información de Pokémon utilizando NestJS como framework backend y MongoDB como base de datos. El proyecto incluye configuración con Docker Compose para facilitar el desarrollo.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🚀 Configuración del Proyecto
 
-## Project setup
+### Prerrequisitos
+
+Antes de comenzar, asegúrate de tener instalado:
+
+- [Node.js](https://nodejs.org/) (versión 18 o superior)
+- [Yarn](https://yarnpkg.com/) o [npm](https://www.npmjs.com/)
+- [Docker](https://www.docker.com/) y [Docker Compose](https://docs.docker.com/compose/)
+- [Git](https://git-scm.com/)
+
+### 1. Clonar el Repositorio
 
 ```bash
-$ yarn install
+git clone <URL_DEL_REPOSITORIO>
+cd 03-pokedex
 ```
 
-## Compile and run the project
+### 2. Configurar Variables de Entorno
+
+El proyecto incluye un archivo `.env.example` con las variables de entorno necesarias. Debes crear tu propio archivo `.env` basado en este ejemplo:
 
 ```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+# Copia el archivo de ejemplo
+cp .env.example .env
 ```
 
-## Run tests
+Edita el archivo `.env` y configura las siguientes variables con los valores apropiados:
 
 ```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+MONGO_INITDB_ROOT_USERNAME=username
+MONGO_INITDB_ROOT_PASSWORD=password
+MONGO_INITDB_DATABASE=database-name
 ```
 
-## Deployment
+**⚠️ Importante:** 
+- Cambia `username`, `password` y `database-name` por valores seguros apropiados para tu entorno
+- No subas el archivo `.env` al repositorio (ya está incluido en `.gitignore`)
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 3. Instalar Dependencias
 
 ```bash
-$ yarn install -g @nestjs/mau
-$ mau deploy
+yarn install
+# o si usas npm
+npm install
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 4. Levantar la Base de Datos con Docker
 
-## Resources
+El proyecto incluye un archivo `docker-compose.yaml` configurado para MongoDB. Para levantar la base de datos:
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+# Levantar MongoDB en segundo plano
+docker-compose up -d
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+# Verificar que el contenedor esté ejecutándose
+docker-compose ps
+```
 
-## Support
+Esto creará:
+- Un contenedor de MongoDB en el puerto `27017`
+- Un volumen persistente en `./mongo-data` para almacenar los datos
+- Las variables de entorno se tomarán automáticamente del archivo `.env`
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### 5. Ejecutar la Aplicación
 
-## Stay in touch
+```bash
+# Modo desarrollo (con watch)
+yarn start:dev
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# Modo desarrollo normal
+yarn start
 
-## License
+# Modo producción
+yarn start:prod
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+La aplicación estará disponible en `http://localhost:3000`
+
+## 🧪 Ejecutar Tests
+
+```bash
+# Tests unitarios
+yarn test
+
+# Tests en modo watch
+yarn test:watch
+
+# Tests end-to-end
+yarn test:e2e
+
+# Cobertura de tests
+yarn test:cov
+```
+
+## 🐳 Comandos Docker Útiles
+
+```bash
+# Levantar servicios
+docker-compose up -d
+
+# Ver logs de MongoDB
+docker-compose logs mongo
+
+# Parar servicios
+docker-compose down
+
+# Parar servicios y eliminar volúmenes (⚠️ elimina datos)
+docker-compose down -v
+
+# Reconstruir imágenes
+docker-compose up --build -d
+```
+
+## 📁 Estructura del Proyecto
+
+```
+03-pokedex/
+├── src/                    # Código fuente
+├── test/                   # Tests e2e
+├── mongo-data/            # Datos de MongoDB (generado automáticamente)
+├── docker-compose.yaml    # Configuración de Docker
+├── .env.example          # Plantilla de variables de entorno
+├── .env                  # Variables de entorno (crear manualmente)
+└── package.json          # Dependencias y scripts
+```
+
+## 🔧 Scripts Disponibles
+
+```bash
+yarn build          # Compilar el proyecto
+yarn format         # Formatear código con Prettier
+yarn lint           # Ejecutar ESLint
+yarn start          # Iniciar aplicación
+yarn start:dev      # Iniciar en modo desarrollo
+yarn start:debug    # Iniciar en modo debug
+yarn start:prod     # Iniciar en modo producción
+```
+
+## 🌐 Endpoints de la API
+
+Una vez que la aplicación esté ejecutándose, puedes acceder a:
+
+- API Base: `http://localhost:3000`
+- Documentación: `http://localhost:3000/api` (si está configurada Swagger)
+
+## 🛠️ Tecnologías Utilizadas
+
+- **Backend:** NestJS
+- **Base de Datos:** MongoDB
+- **Contenedores:** Docker & Docker Compose
+- **Lenguaje:** TypeScript
+- **Testing:** Jest
+- **Linting:** ESLint + Prettier
+
+## 📝 Notas Importantes
+
+1. **Primer Uso:** Al ejecutar Docker Compose por primera vez, se descargará la imagen de MongoDB (puede tomar algunos minutos)
+
+2. **Datos Persistentes:** Los datos de MongoDB se almacenan en `./mongo-data/` y persisten entre reinicios
+
+3. **Puerto MongoDB:** El puerto 27017 debe estar disponible en tu sistema
+
+4. **Variables de Entorno:** Nunca subas el archivo `.env` al repositorio por seguridad
+
+## 🐛 Solución de Problemas
+
+### Error de Puerto en Uso
+```bash
+# Verificar qué proceso usa el puerto 27017
+netstat -tulpn | grep 27017
+# o en Windows
+netstat -ano | findstr 27017
+```
+
+### Problemas con Docker
+```bash
+# Limpiar contenedores y volúmenes
+docker-compose down -v
+docker system prune -f
+
+# Reconstruir desde cero
+docker-compose up --build -d
+```
+
+### Problemas con Dependencias
+```bash
+# Limpiar node_modules y reinstalar
+rm -rf node_modules yarn.lock
+yarn install
+```
+
+## 📚 Recursos Adicionales
+
+- [Documentación de NestJS](https://docs.nestjs.com)
+- [MongoDB Documentation](https://docs.mongodb.com)
+- [Docker Compose Reference](https://docs.docker.com/compose)
+
+## 📄 Licencia
+
+Este proyecto es parte del curso de NestJS de Fernando Herrera y tiene fines educativos.
