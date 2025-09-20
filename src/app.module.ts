@@ -4,6 +4,7 @@ import { join } from 'path';
 import { PokemonModule } from './pokemon/pokemon.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { CommonModule } from './common/common.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -25,6 +26,7 @@ import * as Joi from 'joi';
       rootPath: join(__dirname, '..', 'public'),
     }),
     PokemonModule,
+    CommonModule,
   ],
 })
 export class AppModule {}
